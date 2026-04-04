@@ -14,6 +14,7 @@ const RefurbishedCategory = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
   const [conditionFilter, setConditionFilter] = useState("All");
   const [sortBy, setSortBy] = useState("Price: Low to High");
+  const navigate = useNavigate();
 
   const items = getRefurbishedByCategory(categoryId || "phones");
   const categoryName = categoryId === "phones" ? "Phones" : categoryId === "laptops" ? "Laptops" : categoryId === "tablets" ? "Tablets" : "Watches";
