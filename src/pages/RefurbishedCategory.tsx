@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Filter, ShieldCheck } from "lucide-react";
 import { useState } from "react";
@@ -14,6 +14,7 @@ const RefurbishedCategory = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
   const [conditionFilter, setConditionFilter] = useState("All");
   const [sortBy, setSortBy] = useState("Price: Low to High");
+  const navigate = useNavigate();
 
   const items = getRefurbishedByCategory(categoryId || "phones");
   const categoryName = categoryId === "phones" ? "Phones" : categoryId === "laptops" ? "Laptops" : categoryId === "tablets" ? "Tablets" : "Watches";
@@ -107,7 +108,16 @@ const RefurbishedCategory = () => {
                 <p className="text-xs text-muted-foreground mt-2">
                   {item.stock > 5 ? `${item.stock} in stock` : item.stock > 0 ? `Only ${item.stock} left!` : "Out of stock"}
                 </p>
-                <Button className="w-full mt-3 bg-primary text-primary-foreground hover:bg-primary/90" size="sm" disabled={item.stock === 0}>
+                <Button
+                  className="w-full mt-3 bg-primary text-primary-foreground hover:bg-primary/90"
+                  size="sm"
+                  disabled={item.stock === 0}
+                  onClick={() => {
+                    if (item.stock > 0) {
+                      navigate(`/checkout?device=${item.id}&price=${item.refurbishedPrice}&name=${encodeURIComponent(item.name)}&type=refurbished`);
+                    }
+                  }}
+                >
                   {item.stock > 0 ? "Buy Now" : "Out of Stock"}
                 </Button>
               </div>
