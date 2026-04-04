@@ -108,7 +108,16 @@ const RefurbishedCategory = () => {
                 <p className="text-xs text-muted-foreground mt-2">
                   {item.stock > 5 ? `${item.stock} in stock` : item.stock > 0 ? `Only ${item.stock} left!` : "Out of stock"}
                 </p>
-                <Button className="w-full mt-3 bg-primary text-primary-foreground hover:bg-primary/90" size="sm" disabled={item.stock === 0}>
+                <Button
+                  className="w-full mt-3 bg-primary text-primary-foreground hover:bg-primary/90"
+                  size="sm"
+                  disabled={item.stock === 0}
+                  onClick={() => {
+                    if (item.stock > 0) {
+                      navigate(`/checkout?device=${item.id}&price=${item.refurbishedPrice}&name=${encodeURIComponent(item.name)}&type=refurbished`);
+                    }
+                  }}
+                >
                   {item.stock > 0 ? "Buy Now" : "Out of Stock"}
                 </Button>
               </div>
