@@ -5,6 +5,7 @@ import HowItWorks from "@/components/HowItWorks";
 import PopularDevices from "@/components/PopularDevices";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Testimonials from "@/components/Testimonials";
+import RefurbishedBanner from "@/components/RefurbishedBanner";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -14,6 +15,7 @@ const Index = () => {
       <HeroSection />
       <CategoryGrid />
       <PopularDevices />
+      <RefurbishedBanner />
       <HowItWorks />
       <WhyChooseUs />
       <Testimonials />
